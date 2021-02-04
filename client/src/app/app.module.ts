@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import {NgxSpinnerModule} from 'ngx-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,8 @@ import { ErrorInterceptor } from './_Interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtInterceptor } from './_Interceptors/jwt.interceptor';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { LoadingInterceptor } from './_Interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { JwtInterceptor } from './_Interceptors/jwt.interceptor';
     ListsComponent,
     MessagesComponent,
     NotFoundComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
@@ -41,11 +44,13 @@ import { JwtInterceptor } from './_Interceptors/jwt.interceptor';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    NgxSpinnerModule,
     SharedModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass:ErrorInterceptor,multi:true},
-    {provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor,multi:true}
+    {provide: HTTP_INTERCEPTORS, useClass:JwtInterceptor,multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass:LoadingInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })
