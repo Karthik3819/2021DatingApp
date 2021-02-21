@@ -23,11 +23,11 @@
                     
                     <div>
                         <strong>Last Active:</strong>
-                        {{member.lastActive}}
+                        {{member.lastActive | timeago}}
                     </div>
                     <div>
                         <strong>Member Since:</strong>
-                        {{member.created}}
+                        {{member.created | date:'dd MMM yyyy'}}
                     </div>
                 </div>
 
